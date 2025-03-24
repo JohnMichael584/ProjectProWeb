@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logging Out - Festava Live</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;400;700&display=swap" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(to right, #9933ff, #ff66cc);
+            color: white;
+            text-align: center;
+        }
+        
+        .logout-container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            margin-bottom: 20px;
+        }
+        
+        p {
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+        
+        .spinner-border {
+            display: inline-block;
+            width: 3rem;
+            height: 3rem;
+            color: #ff66cc;
+        }
+    </style>
+</head>
+<body>
+    <div class="logout-container">
+        <h1>Logging Out</h1>
+        <p>Thank you for visiting Festava Live!</p>
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <script>
+        // Log the user out and redirect
+        document.addEventListener('DOMContentLoaded', function() {
+            // Clear login data
+            localStorage.removeItem('festavaLoggedIn');
+            localStorage.removeItem('festavaUsername');
+            
+            // Redirect after a short delay
+            setTimeout(function() {
+                window.location.href = 'login.html';
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

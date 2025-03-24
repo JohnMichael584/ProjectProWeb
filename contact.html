@@ -1,0 +1,409 @@
+    <!-- Add this inside your navigation or header area -->
+<div class="user-profile-container">
+    <div id="userProfileButton" class="user-profile-button">
+        <img id="profileIcon" src="images/default-avatar.png" alt="Profile">
+        <span id="profileUsername">Guest</span>
+        <i class="bi bi-chevron-down"></i>
+    </div>
+    
+    <div id="profileDropdown" class="profile-dropdown">
+        <div class="profile-header">
+            <img id="dropdownProfilePic" src="images/default-avatar.png" alt="Profile">
+            <div class="profile-info">
+                <h4 id="dropdownFullName">Guest User</h4>
+                <p id="dropdownEmail">guest@example.com</p>
+            </div>
+        </div>
+        <div class="profile-menu">
+            <a href="#" id="viewProfileLink"><i class="bi bi-person"></i> View Profile</a>
+            <a href="#" id="ticketsLink"><i class="bi bi-ticket-perforated"></i> My Tickets</a>
+            <a href="#" id="settingsLink"><i class="bi bi-gear"></i> Settings</a>
+            <a href="#" id="logoutButton"><i class="bi bi-box-arrow-right"></i> Logout</a>
+        </div>
+    </div>
+</div>
+
+<!-- Add this modal for profile viewing -->
+<div id="profileModal" class="profile-modal">
+    <div class="profile-modal-content">
+        <span id="closeProfileModal" class="close-modal">&times;</span>
+        <h2>My Profile</h2>
+        
+        <div class="profile-details">
+            <div class="profile-picture-container">
+                <img id="modalProfilePic" src="images/default-avatar.png" alt="Profile Picture">
+            </div>
+            
+            <div class="profile-info-container">
+                <div class="profile-info-row">
+                    <div class="info-label">Full Name:</div>
+                    <div id="modalFullName" class="info-value">Not Available</div>
+                </div>
+                
+                <div class="profile-info-row">
+                    <div class="info-label">Username:</div>
+                    <div id="modalUsername" class="info-value">Not Available</div>
+                </div>
+                
+                <div class="profile-info-row">
+                    <div class="info-label">Email:</div>
+                    <div id="modalEmail" class="info-value">Not Available</div>
+                </div>
+                
+                <div class="profile-info-row">
+                    <div class="info-label">Phone:</div>
+                    <div id="modalPhone" class="info-value">Not Available</div>
+                </div>
+                
+                <div class="profile-info-row">
+                    <div class="info-label">Age:</div>
+                    <div id="modalAge" class="info-value">Not Available</div>
+                </div>
+                
+                <div class="profile-info-row">
+                    <div class="info-label">Gender:</div>
+                    <div id="modalGender" class="info-value">Not Available</div>
+                </div>
+                
+                <div class="profile-info-row">
+                    <div class="info-label">Address:</div>
+                    <div id="modalAddress" class="info-value">Not Available</div>
+                </div>
+                
+                <div class="profile-info-row">
+                    <div class="info-label">Member Since:</div>
+                    <div id="modalRegDate" class="info-value">Not Available</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* User Profile Button & Dropdown */
+    .user-profile-container {
+        position: relative;
+        margin-left: 20px;
+    }
+    
+    .user-profile-button {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        padding: 5px 10px;
+        border-radius: 20px;
+        transition: all 0.3s;
+        background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .user-profile-button:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .user-profile-button img {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 8px;
+    }
+    
+    .user-profile-button span {
+        margin-right: 5px;
+        max-width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    
+    .profile-dropdown {
+        position: absolute;
+        top: 45px;
+        right: 0;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(10px);
+        min-width: 220px;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        display: none;
+        z-index: 1000;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .profile-header {
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .profile-header img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 10px;
+    }
+    
+    .profile-info h4 {
+        margin: 0;
+        font-size: 14px;
+    }
+    
+    .profile-info p {
+        margin: 0;
+        font-size: 12px;
+        opacity: 0.7;
+    }
+    
+    .profile-menu {
+        padding: 10px 0;
+    }
+    
+    .profile-menu a {
+        display: block;
+        padding: 8px 15px;
+        color: white;
+        text-decoration: none;
+        transition: all 0.2s;
+    }
+    
+    .profile-menu a:hover {
+        background: rgba(255, 102, 204, 0.3);
+    }
+    
+    .profile-menu i {
+        margin-right: 8px;
+        width: 16px;
+        text-align: center;
+    }
+    
+    /* Profile Modal */
+    .profile-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 2000;
+        overflow: auto;
+    }
+    
+    .profile-modal-content {
+        position: relative;
+        background: rgba(15, 15, 15, 0.95);
+        backdrop-filter: blur(10px);
+        margin: 10% auto;
+        padding: 25px;
+        width: 80%;
+        max-width: 600px;
+        border-radius: 15px;
+        animation: fadeIn 0.3s;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .close-modal {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 28px;
+        cursor: pointer;
+        transition: all 0.2s;
+        color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .close-modal:hover {
+        color: #ff66cc;
+    }
+    
+    .profile-modal-content h2 {
+        text-align: center;
+        color: #ff66cc;
+        margin-bottom: 25px;
+    }
+    
+    .profile-details {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .profile-picture-container {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    .profile-picture-container img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid rgba(255, 102, 204, 0.5);
+    }
+    
+    .profile-info-container {
+        flex: 1;
+    }
+    
+    .profile-info-row {
+        display: flex;
+        margin-bottom: 12px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .info-label {
+        width: 120px;
+        font-weight: bold;
+        color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .info-value {
+        flex: 1;
+        color: white;
+    }
+    
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @media (min-width: 768px) {
+        .profile-details {
+            flex-direction: row;
+        }
+        
+        .profile-picture-container {
+            margin-right: 30px;
+            margin-bottom: 0;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const isLoggedIn = localStorage.getItem('festavaLoggedIn') === 'true';
+        const username = localStorage.getItem('festavaUsername');
+        
+        // Profile button and dropdown elements
+        const profileButton = document.getElementById('userProfileButton');
+        const profileDropdown = document.getElementById('profileDropdown');
+        const profileUsername = document.getElementById('profileUsername');
+        const dropdownFullName = document.getElementById('dropdownFullName');
+        const dropdownEmail = document.getElementById('dropdownEmail');
+        const profileIcon = document.getElementById('profileIcon');
+        const dropdownProfilePic = document.getElementById('dropdownProfilePic');
+        
+        // Profile modal elements
+        const profileModal = document.getElementById('profileModal');
+        const closeProfileModal = document.getElementById('closeProfileModal');
+        const viewProfileLink = document.getElementById('viewProfileLink');
+        const logoutButton = document.getElementById('logoutButton');
+        
+        // Modal profile info elements
+        const modalProfilePic = document.getElementById('modalProfilePic');
+        const modalFullName = document.getElementById('modalFullName');
+        const modalUsername = document.getElementById('modalUsername');
+        const modalEmail = document.getElementById('modalEmail');
+        const modalPhone = document.getElementById('modalPhone');
+        const modalAge = document.getElementById('modalAge');
+        const modalGender = document.getElementById('modalGender');
+        const modalAddress = document.getElementById('modalAddress');
+        const modalRegDate = document.getElementById('modalRegDate');
+        
+        // Update UI based on login status
+        if (isLoggedIn && username) {
+            // Get user data
+            const userData = JSON.parse(localStorage.getItem('festavaUserData')) || {};
+            const userInfo = userData[username];
+            
+            if (userInfo) {
+                // Update profile button
+                profileUsername.textContent = username;
+                
+                // Update dropdown
+                dropdownFullName.textContent = userInfo.fullName || username;
+                dropdownEmail.textContent = userInfo.email || 'No email provided';
+                
+                // Update modal
+                modalFullName.textContent = userInfo.fullName || 'Not provided';
+                modalUsername.textContent = username;
+                modalEmail.textContent = userInfo.email || 'Not provided';
+                modalPhone.textContent = userInfo.contact || 'Not provided';
+                modalAge.textContent = userInfo.age || 'Not provided';
+                modalGender.textContent = userInfo.gender || 'Not provided';
+                modalAddress.textContent = userInfo.address || 'Not provided';
+                
+                // Format registration date
+                if (userInfo.registrationDate) {
+                    const regDate = new Date(userInfo.registrationDate);
+                    modalRegDate.textContent = regDate.toLocaleDateString();
+                }
+            }
+        } else {
+            // Set default for guest
+            profileUsername.textContent = 'Guest';
+            dropdownFullName.textContent = 'Guest User';
+            dropdownEmail.textContent = 'Not logged in';
+        }
+        
+        // Toggle dropdown when clicking profile button
+        profileButton.addEventListener('click', function(e) {
+            e.stopPropagation();
+            
+            if (profileDropdown.style.display === 'block') {
+                profileDropdown.style.display = 'none';
+            } else {
+                profileDropdown.style.display = 'block';
+            }
+        });
+        
+        // Close dropdown when clicking elsewhere
+        document.addEventListener('click', function(e) {
+            if (profileDropdown.style.display === 'block' && !profileDropdown.contains(e.target)) {
+                profileDropdown.style.display = 'none';
+            }
+        });
+        
+        // Show profile modal
+        viewProfileLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            if (isLoggedIn) {
+                profileModal.style.display = 'block';
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+        
+        // Close profile modal
+        closeProfileModal.addEventListener('click', function() {
+            profileModal.style.display = 'none';
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target === profileModal) {
+                profileModal.style.display = 'none';
+            }
+        });
+        
+        // Logout functionality
+        logoutButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            localStorage.removeItem('festavaLoggedIn');
+            localStorage.removeItem('festavaUsername');
+            
+            // Redirect to login page
+            window.location.href = 'login.html';
+        });
+    });
+</script>
