@@ -4,31 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up - Festava Live</title>
-    <!-- Use the same fonts as your main site -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;400;700&display=swap" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-icons.css" rel="stylesheet">
     <style>
-        /* General Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Outfit', sans-serif;
-        }
-
-        /* Background Video */
+        /* Same styles as login page */
         body {
             height: 100vh;
-            margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
+            color: #fff;
             position: relative;
-            color: white;
+            overflow: hidden;
+            font-family: 'Outfit', sans-serif;
         }
-
-        video.background-video {
+        
+        .video-bg {
             position: absolute;
             top: 0;
             left: 0;
@@ -36,294 +28,171 @@
             height: 100%;
             object-fit: cover;
             z-index: -1;
+            opacity: 0.8;
         }
-
-        /* Dark overlay */
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 1;
-        }
-
-        /* Signup Container - matches Festava style */
+        
         .signup-container {
-            position: relative;
-            z-index: 2;
             background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(8px);
             padding: 40px;
             border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-            width: 80%;
-            max-width: 800px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+            width: 350px;
             border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
         }
-
-        /* Title - using Festava color scheme */
-        h2 {
-            font-size: 2.2rem;
+        
+        .signup-title {
             color: #ff66cc;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             text-align: center;
-            text-shadow: 0 0 10px rgba(255, 102, 204, 0.5);
         }
-
-        /* Form styling */
-        .signup-form {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-
-        /* Input fields - matching Festava style */
-        input, textarea, select {
-            width: 48%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 5px;
+        
+        .form-control {
             background: rgba(255, 255, 255, 0.1);
             color: white;
-            outline: none;
-            transition: all 0.3s;
+            border: none;
+            margin-bottom: 15px;
         }
-
-        /* Full width elements */
-        textarea, button, .file-input-container {
-            width: 100%;
+        
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 10px rgba(255, 102, 204, 0.7);
+            color: white;
         }
-
-        input::placeholder, textarea::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        input:focus, textarea:focus, select:focus {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: #ff66cc;
-            box-shadow: 0 0 10px rgba(255, 102, 204, 0.5);
-        }
-
-        /* Button - using Festava gradient */
-        button {
-            padding: 12px;
+        
+        .btn-signup {
             background: linear-gradient(45deg, #ff66cc, #9933ff);
             border: none;
-            border-radius: 5px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            color: white;
+            width: 100%;
             margin-top: 10px;
         }
-
-        button:hover {
+        
+        .btn-signup:hover {
             background: linear-gradient(45deg, #9933ff, #ff66cc);
-            box-shadow: 0 0 15px rgba(255, 102, 204, 0.7);
+            box-shadow: 0 0 20px rgba(255, 102, 204, 0.8);
         }
-
-        /* Links */
-        .form-links {
+        
+        .signup-links {
+            margin-top: 15px;
             text-align: center;
-            margin-top: 20px;
         }
-
-        .form-links a {
+        
+        .signup-links a {
             color: #ff66cc;
-            text-decoration: none;
             display: block;
             margin-bottom: 10px;
         }
-
-        .form-links a:hover {
-            text-decoration: underline;
-        }
-
-        /* File input styling */
-        .file-input-container {
-            position: relative;
-            margin-bottom: 15px;
-        }
-
-        .file-input-label {
-            display: block;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px dashed rgba(255, 255, 255, 0.3);
-            border-radius: 5px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .file-input-label:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: #ff66cc;
-        }
-
-        .file-input {
-            position: absolute;
-            width: 0.1px;
-            height: 0.1px;
-            opacity: 0;
-            overflow: hidden;
-            z-index: -1;
-        }
-
-        /* Success message styling */
-        .success-message {
-            background: rgba(46, 204, 113, 0.2);
-            color: #2ecc71;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            text-align: center;
-            display: none;
-        }
-
-        /* Error message styling */
+        
         .error-message {
-            background: rgba(231, 76, 60, 0.2);
-            color: #e74c3c;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
+            color: #ff4d4d;
             text-align: center;
+            margin-bottom: 15px;
             display: none;
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .signup-container {
-                width: 90%;
-                padding: 25px;
-            }
-            
-            input, select {
-                width: 100%;
-            }
+        .success-message {
+            color: #4dff4d;
+            text-align: center;
+            margin-bottom: 15px;
+            display: none;
         }
     </style>
 </head>
 <body>
-    <!-- Background Video (same as main site) -->
-    <video class="background-video" autoplay muted loop>
+    <video autoplay muted loop class="video-bg">
         <source src="video/pexels-2022395.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
     <div class="signup-container">
-        <h2>Join Festava Live</h2>
+        <h2 class="signup-title">Create Your Festava Account</h2>
         
-        <div id="successMessage" class="success-message">
-            Account created successfully! Redirecting to login page...
-        </div>
+        <div id="errorMessage" class="error-message"></div>
+        <div id="successMessage" class="success-message"></div>
         
-        <div id="errorMessage" class="error-message">
-            Username already exists. Please choose a different username.
-        </div>
-        
-        <form class="signup-form" id="signupForm">
-            <input type="text" name="full_name" id="full_name" placeholder="Full Name" required>
-            <input type="email" name="email" id="email" placeholder="Email" required>
-            
-            <input type="text" name="username" id="username" placeholder="Username" required>
-            <input type="password" name="password" id="password" placeholder="Password" required>
-            
-            <input type="tel" name="contact" id="contact" placeholder="Phone Number" required>
-            <input type="number" name="age" id="age" placeholder="Age" min="18" required>
-            
-            <select name="gender" id="gender" required>
-                <option value="" disabled selected>Select Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-                <option value="prefer-not-to-say">Prefer not to say</option>
-            </select>
-            
-            <textarea name="address" id="address" placeholder="Full Address" rows="3" required></textarea>
-            
-            <div class="file-input-container">
-                <label class="file-input-label" for="profile_picture">
-                    <i class="bi bi-camera-fill"></i> Upload Profile Picture
-                </label>
-                <input class="file-input" type="file" id="profile_picture" name="profile_picture" accept="image/*">
+        <form id="signupForm">
+            <div class="mb-3">
+                <input type="text" class="form-control" id="username" placeholder="Choose a Username" required>
             </div>
             
-            <button type="submit">Create Account</button>
+            <div class="mb-3">
+                <input type="email" class="form-control" id="email" placeholder="Email Address" required>
+            </div>
             
-            <div class="form-links">
-                <a href="login.html">Already have an account? Log in</a>
+            <div class="mb-3">
+                <input type="password" class="form-control" id="password" placeholder="Create Password" required>
+            </div>
+            
+            <div class="mb-3">
+                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-signup">Sign Up</button>
+            
+            <div class="signup-links">
+                <a href="login.html">Already have an account? Login</a>
             </div>
         </form>
     </div>
 
     <script>
-        // Update file input label to show selected filename
-        document.getElementById('profile_picture').addEventListener('change', function(e) {
-            const label = document.querySelector('.file-input-label');
-            if (this.files.length > 0) {
-                label.innerHTML = `<i class="bi bi-check-circle-fill"></i> ${this.files[0].name}`;
-            } else {
-                label.innerHTML = '<i class="bi bi-camera-fill"></i> Upload Profile Picture';
-            }
-        });
-
-        // Handle form submission
-        document.getElementById('signupForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form values
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const fullName = document.getElementById('full_name').value;
-            const email = document.getElementById('email').value;
-            const contact = document.getElementById('contact').value;
-            const age = document.getElementById('age').value;
-            const gender = document.getElementById('gender').value;
-            const address = document.getElementById('address').value;
-            
-            // Get existing user data from localStorage
+        function registerUser(username, password, email) {
             const userData = JSON.parse(localStorage.getItem('festavaUserData')) || {};
             
-            // Check if username already exists
             if (userData[username]) {
-                document.getElementById('errorMessage').style.display = 'block';
-                document.getElementById('successMessage').style.display = 'none';
-                return;
+                return false;
             }
             
-            // Store new user data
             userData[username] = {
                 password: password,
-                fullName: fullName,
                 email: email,
-                contact: contact,
-                age: age,
-                gender: gender,
-                address: address,
-                registrationDate: new Date().toISOString()
+                registeredAt: new Date().toISOString()
             };
             
             localStorage.setItem('festavaUserData', JSON.stringify(userData));
+            return true;
+        }
+
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            // Show success message
-            document.getElementById('successMessage').style.display = 'block';
-            document.getElementById('errorMessage').style.display = 'none';
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
             
-            // Reset form
-            this.reset();
-            document.querySelector('.file-input-label').innerHTML = '<i class="bi bi-camera-fill"></i> Upload Profile Picture';
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
             
-            // Redirect to login page after 2 seconds
-            setTimeout(function() {
-                window.location.href = 'login.html';
-            }, 2000);
+            // Basic validation
+            if (password !== confirmPassword) {
+                errorMessage.textContent = 'Passwords do not match!';
+                errorMessage.style.display = 'block';
+                successMessage.style.display = 'none';
+                return;
+            }
+            
+            if (password.length < 6) {
+                errorMessage.textContent = 'Password must be at least 6 characters long!';
+                errorMessage.style.display = 'block';
+                successMessage.style.display = 'none';
+                return;
+            }
+            
+            // Attempt registration
+            if (registerUser(username, password, email)) {
+                errorMessage.style.display = 'none';
+                successMessage.textContent = `Welcome, ${username}! Redirecting to login...`;
+                successMessage.style.display = 'block';
+                
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 2000);
+            } else {
+                errorMessage.textContent = 'Username already exists. Please choose another.';
+                errorMessage.style.display = 'block';
+                successMessage.style.display = 'none';
+            }
         });
     </script>
 </body>
