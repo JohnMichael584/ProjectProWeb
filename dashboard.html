@@ -33,6 +33,15 @@ https://templatemo.com/tm-583-festava-live
 
     <body>
 
+        <script>
+            // Check if the user is logged in
+            if (!localStorage.getItem("isLoggedIn")) {
+                // If not logged in, redirect to login page
+                window.location.href = "index.html";
+            }
+    
+    
+        </script>
         <main>
 
             <header class="site-header">
@@ -677,6 +686,7 @@ https://templatemo.com/tm-583-festava-live
             </div>
         </footer>
 
+     
 <!--
 
 T e m p l a t e M o
