@@ -117,6 +117,12 @@
     </style>
 </head>
 <body>
+    <script>
+        if (localStorage.getItem("isAuthenticated") !== "true") {
+         window.location.href = "index.html";
+         
+        }
+     </script>
     <video autoplay muted loop class="video-bg">
         <source src="video/pexels-2022395.mp4" type="video/mp4">
         Your browser does not support the video tag.
@@ -198,12 +204,6 @@
             return false;
         }
 
-        function logoutUser() {
-            localStorage.removeItem('festavaLoggedIn');
-            localStorage.removeItem('festavaUsername');
-            window.location.href = 'login.html';
-        }
-
         function isUserLoggedIn() {
             return localStorage.getItem('festavaLoggedIn') === 'true';
         }
@@ -227,26 +227,21 @@
                 // Redirect after a short delay
                 setTimeout(() => {
                     window.location.href = 'dashboard.html';
-                }, 1500);
+                }, 500);
             } else {
                 errorMessage.style.display = 'block';
                 welcomeMessage.style.display = 'none';
             }
         });
         
-        // Check if user is already logged in
-        window.addEventListener('DOMContentLoaded', function() {
-            if (isUserLoggedIn()) {
-                window.location.href = 'dashboard.html';
-            }
+    
 
             // Forgot Password Functionality
             document.getElementById('forgotPassword').addEventListener('click', function(e) {
                 e.preventDefault();
                 alert('Please contact support at support@festava.live to reset your password.');
             });
-        });
-
+    
         // Optional: Demo User Creation
         function createDemoUser() {
             registerUser('festavauser', 'concert2025', 'user@festava.live');
